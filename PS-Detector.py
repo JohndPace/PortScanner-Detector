@@ -86,10 +86,7 @@ def RemoveStaleEntries(connections, time, limit):
 
 def fanout(connections, currentTime, fanoutTime, thresholdRate):
     lock.acquire()      # print statements show a race condition without a lock
-    # alternatively, instead of clearing susConnections for each call to this
-    # we could instead set a timerThreshold for RemoveStaleEntries, then remove entries
-    # older than that threshold(ie for 1 second it's 1, for 1 minute it's 60, etc)
-    # then we wouldn't need to worry about the race condition for susConnections being altered by other threads
+
     susConnections = {}
     # this will check all connections from the last 5 minutes
     # could be made more efficient with 3 separate hashtables for the different time window sizes
